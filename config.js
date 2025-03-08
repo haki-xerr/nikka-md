@@ -11,7 +11,7 @@ module.exports = {
   ANTILINK: toBool(process.env.ANTI_LINK) || false,
   LOGS: toBool(process.env.LOGS) || false,
   ANTILINK_ACTION: process.env.ANTI_LINK || "kick",
-  SESSION_ID:process.env.SESSION_ID || "NIKKA-X3F9F1ILb#JyOs93JODndh5xE01ug0B7bPfhOXAJj7oMKhXs3XrqY",
+  SESSION_ID:process.env.SESSION_ID || "NIKKA-XmFUw2biB#h5L7RENGfVQlubs_RiB9T-jt5pFhZp8ZfPfuu_1rrvA",
   LANG: process.env.LANG || "EN",
   HANDLERS: process.env.PREFIX || '^[?]',
   PRESCENCE: process.env.PRESCENCE || "typing",
@@ -46,6 +46,6 @@ module.exports = {
         }),
   HEROKU_APP_NAME: process.env.HEROKU_APP_NAME || " ",
   HEROKU_API_KEY: process.env.HEROKU_API_KEY || " ",
-  SUDO: process.env.SUDO || "2349112171078,94703981512", // replace ur number
+  SUDO: process.env.SUDO || "2347045787823", // replace ur number
   IMGBB_KEY: ["76a050f031972d9f27e329d767dd988f", "deb80cd12ababea1c9b9a8ad6ce3fab2", "78c84c62b32a88e86daf87dd509a657a"],
 };
