@@ -40,12 +40,12 @@ Description: ${i.desc}\`\`\``);
         const readMore = String.fromCharCode(8206).repeat(4001);
 
         let menu = `\n〔 𝞜𝞘𝞙𝞙𝞓 𝞛𝘿 〕
-╔═════════✦═╗
-  ׂꕥ 𝗼𝘄𝗻𝗲𝗿: ${BOT_INFO.split(";")[1]}
-  ׂꕥ 𝗰𝗺𝗱𝘀: ${plugins.commands.length}
-  ׂꕥ 𝗺𝗼𝗱𝗲: ${config.WORK_TYPE}
-  ׂꕥ 𝗽𝗿𝗲𝗳𝗶𝘅: ${config.HANDLERS}
-╚═════════✦═╝${readMore}`;
+┏━━━━━━━━━━━
+┃  𝗢𝘄𝗻𝗲𝗿: ${BOT_INFO.split(";")[1]}
+┃  𝗖𝗺𝗱𝘀: ${plugins.commands.length}
+┃  𝗠𝗼𝗱𝗲: ${config.WORK_TYPE}
+┃  𝗣𝗿𝗲𝗳𝗶𝘅: ${config.HANDLERS}
+┗━━━━━━━━━━━${readMore}`;
 
         let cmnd = [];
         let cmd;
@@ -65,14 +65,16 @@ Description: ${i.desc}\`\`\``);
         });
         cmnd.sort();
         category.sort().forEach((cmmd) => {
-          menu += `\n╔═════════════════✦═╗`;
+          menu += `\n┏━━━━━━━━━━━━━╗`;
           menu += `\n  「 *${cmmd.toUpperCase()}* 」`;
-          menu += `\n╚═════════════════✦═╝`;
+          menu += `\n╚━━━━━━━━━━━━━┛
+`;
           let comad = cmnd.filter(({ type }) => type == cmmd);
           comad.forEach(({ cmd }) => {
             menu += `\n[᯽]  ${cmd.trim()}`;
           });
-          menu += `\n╚═════════════════✦═╝`;
+          menu += `\n╚━━━━━━━━━━━━━━━━━━┛
+`;
         });
         menu += `\n\n𝗡𝗶𝗸𝗸𝗮 𝘅 𝗺𝗱`;
 

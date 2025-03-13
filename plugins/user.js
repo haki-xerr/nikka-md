@@ -532,8 +532,8 @@ command(
     desc: "Enable/Disable autobio updates",
     type: "user",
   },
-  async (message, match) => {
-    const user = message.sender;
+  async (message, m, match) => {
+    const user = m.sender;
     const args = match.toLowerCase();
 
     if (args === "on") {

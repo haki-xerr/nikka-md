@@ -1,5 +1,5 @@
-const { command, isPrivate } = require('../lib');
-const { getAfkMessage, setAfkMessage, delAfkMessage } = require('../DB/afk');
+/*const { command, isPrivate } = require('../lib');
+const { getAfkMessage, setAfkMessage, delAfkMessage } = require('../lib/database/afk');
 
 const afkTrack = {};
 
@@ -7,15 +7,12 @@ command(
   {
     pattern: 'afk',
     desc: 'Manage the global AFK message',
-    fromMe: isPrivate, // Set to 'false' if you want public access
+    fromMe: isPrivate,
     type: 'user',
   },
-  async (message, m, match) => {
-    const prefix = message.prefix || '.'; // Adjust prefix logic if needed
-    let args = message.text.split(' ').slice(1).join(' ').trim(); // Extract arguments manually
-
-    console.log("Received match:", match);
-    console.log("Extracted args:", args);
+  async (message) => {
+    const prefix = message.prefix || '.';
+    let args = message.text.split(' ').slice(1).join(' ').trim();
 
     if (!args) {
       return await message.reply(`${prefix}afk on\n${prefix}afk set <message>\n${prefix}afk off`);
@@ -55,25 +52,23 @@ command(
     on: 'text',
     dontAddCommandList: true,
   },
-  async (message) => {
+  async (message, m) => {
     const afkData = await getAfkMessage();
     if (!afkData) return;
 
-    if (message.isGroup) {
-      if (message.mention?.includes(message.user)) {
-        return await message.reply(
-          `${afkData.message}\n\nLast Seen: ${formatDuration(Date.now() - afkData.timestamp)}`
-        );
-      }
-    } else {
-      if (m.sender === message.user) return;
-      const now = Date.now();
-      if (now - (afkTrack[m.sender] || 0) < 30000) return;
-      afkTrack[m.sender] = now;
+    if (message.isGroup && message.mention?.includes(message.user)) {
       return await message.reply(
-        `${afkData.message}\n\nLast Seen: ${formatDuration(now - afkData.timestamp)}`
+        `${afkData.message}\n\nLast Seen: ${formatDuration(Date.now() - afkData.timestamp)}`
       );
     }
+
+    const now = Date.now();
+    if (now - (afkTrack[message.sender] || 0) < 30000) return;
+    afkTrack[m.sender] = now;
+
+    return await message.reply(
+      `${afkData.message}\n\nLast Seen: ${formatDuration(now - afkData.timestamp)}`
+    );
   }
 );
 
@@ -83,3 +78,5 @@ function formatDuration(ms) {
   const seconds = Math.floor((ms / 1000) % 60);
   return `${hours}hr ${minutes}mins ${seconds}sec`;
 }
+
+*/
