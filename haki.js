@@ -5,7 +5,7 @@ const {
   Browsers,
   makeCacheableSignalKeyStore,
   makeInMemoryStore,
-} = require("haki-baileys");
+} = require("@whiskeysockets/baileys");
 const fs = require("fs");
 const { serialize } = require("./lib/serialize");
 const { Message } = require("./lib/Base");
