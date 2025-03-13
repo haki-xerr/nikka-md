@@ -12,10 +12,7 @@
     "url": "git+https://github.com/hakisolos/nikka-x-md.git"
   },
   "keywords": [
-    "bot",
-    "ai",
     "Haki",
-    "KING",
     "ironm4n"
   ],
   "author": "king",
@@ -46,7 +43,6 @@
     "g-i-s": "^2.1.6",
     "google-tts-api": "^2.0.2",
     "got": "^11.8.2",
-    "haki-baileys": "github:WhiskeySockets/Baileys/tree/feature/newsletter",
     "heroku-client": "^3.1.0",
     "imgbb-uploader": "^1.5.1",
     "jimp": "^0.16.1",
@@ -87,35 +83,3 @@
 }
 
 
-/*
-{
-  name: 'Jarvis-md',
-  version: '3.0.0',
-  description: 'A simple WhatsApp Bot Based On WhiskeySockets/Baileys',
-  main: 'index.js',
-  scripts: {
-    postinstall: `npm install -g pm2 && node -e "try { require('sharp') } catch (e) { process.exit(1); }" || yarn add --ignore-engines sharp@0.33.5`,
-    start: 'pm2 start . --attach --name Jarvis-md',
-    stop: 'pm2 stop Jarvis-md'
-  },
-  engines: { node: '>=18.0.0 <=22.x' },
-  dependencies: {
-    '@whiskeysockets/baileys': 'git+https://github.com/WhiskeySockets/Baileys.git#feature/newsletter',
-    'browser-id3-writer': '^4.4.0',
-    cheerio: '^1.0.0',
-    'node-cron': '^3.0.3',
-    'jarvis-md': '^1.0.7',
-    jimp: '^0.16.1',
-    'fluent-ffmpeg': '^2.1.2',
-    'form-data': '^4.0.0',
-    'link-preview-js': '^3.0.4',
-    'node-webpmux': '^3.2.0',
-    pdfkit: '^0.15.0',
-    pm2: '^5.4.2',
-    pg: '^8.7.3',
-    sequelize: '^6.21.4',
-    'simple-git': '^3.20.0',
-    sqlite3: '^5.0.11'
-  }
-}
-*/
