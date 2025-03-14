@@ -364,3 +364,43 @@ command(
       }
   }
 );
+
+
+// Regex pattern to validate URL
+const urlRegex = /^(https?:\/\/(?:www\.)?[a-zA-Z0-9-]+\.[a-zA-Z]{2,})(?:[\/\w \.-]*)*\/?$/;
+
+command(
+  {
+    pattern: "source",
+    fromMe: isPrivate,
+    desc: "Fetches the source code zip file from the provided URL",
+    type: "utility",
+  },
+  async (message, match) => {
+    // Validate the URL format using regex
+    if (!match || !urlRegex.test(match.trim())) {
+      return await message.reply("Please provide a valid URL.");
+    }
+
+    const url = match.trim();
+
+    try {
+      // Fetch the zip file from the API
+      const response = await axios.get(`https://fastrestapis.fasturl.cloud/tool/getcode?url=${encodeURIComponent(url)}`, {
+        responseType: 'arraybuffer', // To handle binary data (zip file)
+      });
+
+      // Send the zip file to the user
+      await message.client.sendMessage(message.jid, {
+        document: { url: response.config.url }, // This is the API URL which directly links to the zip file
+        mimetype: 'application/zip',
+        fileName: `source_code_${Date.now()}.zip`, // Set a filename for the zip
+        caption: `Here is the source code zip for the URL: ${url}`, // Caption
+      });
+
+    } catch (error) {
+      console.error(error);
+      return await message.reply("There was an error fetching the source code. Please try again later.");
+    }
+  }
+);
