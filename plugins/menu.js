@@ -39,13 +39,13 @@ Description: ${i.desc}\`\`\``);
           .split(",");
         let usern = message.pushName;
         const readMore = String.fromCharCode(8206).repeat(4001);
-
-        let menu = `\`\`\`╭───𖣘 🇳​​🇮​​🇰​​🇰​​🇦​ ​🇲​​🇩​ 𖣘
+        const fek = await tiny("nikka md")
+        let menu = `\`\`\`╭────𖣘 ${fek} 𖣘
 🌻 Prefix: ${config.HANDLERS}
 🌻︎ Owner: ${BOT_INFO.split(";")[1]}
 🌻︎ Mode: ${config.WORK_TYPE}
 🌻 Cmds: ${plugins.commands.length}
-╰─────\`\`\`\n${readMore}`;
+╰───────\`\`\`\n${readMore}`;
 
         let cmnd = [];
         let cmd;
@@ -67,7 +67,7 @@ Description: ${i.desc}\`\`\``);
 
         cmnd.sort();
         category.sort().forEach((cmmd) => {
-          menu += `\n\`\`\`╭─── ${cmmd.toUpperCase()} ────\`\`\``;
+          menu += `\n\`\`\`╭── ${cmmd.toUpperCase()} ──\`\`\``;
           let comad = cmnd.filter(({ type }) => type == cmmd);
           comad.forEach(({ cmd }) => {
             menu += `\n│\`\`\`❀ ${cmd.trim()}\`\`\``;
