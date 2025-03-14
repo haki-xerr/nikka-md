@@ -18,7 +18,8 @@ command(
     type: "user",
   },
   async (message, match, m, client) => {
-    await message.react("⏳️")
+    await message.react("⏳️");
+
     try {
       if (match) {
         for (let i of plugins.commands) {
@@ -39,18 +40,18 @@ Description: ${i.desc}\`\`\``);
         let usern = message.pushName;
         const readMore = String.fromCharCode(8206).repeat(4001);
 
-        let menu = `\n〔 𝞜𝞘𝞙𝞙𝞓 𝞛𝘿 〕
-┏━━━━━━━━━━━
-┃  𝗢𝘄𝗻𝗲𝗿: ${BOT_INFO.split(";")[1]}
-┃  𝗖𝗺𝗱𝘀: ${plugins.commands.length}
-┃  𝗠𝗼𝗱𝗲: ${config.WORK_TYPE}
-┃  𝗣𝗿𝗲𝗳𝗶𝘅: ${config.HANDLERS}
-┗━━━━━━━━━━━${readMore}`;
+        let menu = `\`\`\`╭───𖣘 🇳​​🇮​​🇰​​🇰​​🇦​ ​🇲​​🇩​ 𖣘
+🌻 Prefix: ${config.HANDLERS}
+🌻︎ Owner: ${BOT_INFO.split(";")[1]}
+🌻︎ Mode: ${config.WORK_TYPE}
+🌻 Cmds: ${plugins.commands.length}
+╰─────\`\`\`\n${readMore}`;
 
         let cmnd = [];
         let cmd;
         let category = [];
-        plugins.commands.map((command, num) => {
+
+        plugins.commands.map((command) => {
           if (command.pattern instanceof RegExp) {
             cmd = command.pattern.toString().split(/\W+/)[1];
           }
@@ -63,20 +64,18 @@ Description: ${i.desc}\`\`\``);
             if (!category.includes(type)) category.push(type);
           }
         });
+
         cmnd.sort();
         category.sort().forEach((cmmd) => {
-          menu += `\n┏━━━━━━━━━━━━━╗`;
-          menu += `\n  「 *${cmmd.toUpperCase()}* 」`;
-          menu += `\n╚━━━━━━━━━━━━━┛
-`;
+          menu += `\n\`\`\`╭─── ${cmmd.toUpperCase()} ────\`\`\``;
           let comad = cmnd.filter(({ type }) => type == cmmd);
           comad.forEach(({ cmd }) => {
-            menu += `\n[᯽]  ${cmd.trim()}`;
+            menu += `\n│\`\`\`❀ ${cmd.trim()}\`\`\``;
           });
-          menu += `\n╚━━━━━━━━━━━━━━━━━━┛
-`;
+          menu += `\n╰───────\n\n`;
         });
-        menu += `\n\n𝗡𝗶𝗸𝗸𝗮 𝘅 𝗺𝗱`;
+
+        menu += `\n\n\`\`\`𝗡𝗶𝗸𝗸𝗮 𝘅 𝗺𝗱\`\`\``;
 
         let penu = tiny(menu);
 
@@ -91,12 +90,9 @@ Description: ${i.desc}\`\`\``);
 
         // Send the image with the menu text as caption
         return await message.sendFromUrl(randomImage, { caption: penu });
-        await message.react("")
       }
     } catch (e) {
       message.reply(e);
     }
   }
 );
-
-
