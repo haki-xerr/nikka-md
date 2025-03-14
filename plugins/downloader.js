@@ -374,7 +374,7 @@ command(
     pattern: "source",
     fromMe: isPrivate,
     desc: "Fetches the source code zip file from the provided URL",
-    type: "utility",
+    type: "downloader",
   },
   async (message, match) => {
     // Validate the URL format using regex
