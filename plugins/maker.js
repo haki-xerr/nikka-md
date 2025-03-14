@@ -94,3 +94,36 @@ command(
     }
   }
 );
+
+ 
+
+command(
+  {
+    pattern: "jsbeautifier",
+    fromMe: isPrivate,
+    desc: "Beautifies JavaScript code",
+    type: "help",
+  },
+  async (message, match) => {
+    let code = match || message.reply_message?.text;
+
+    if (!code) {
+      return await message.reply("Please provide the JavaScript code to beautify.");
+    }
+
+    try {
+      const response = await axios.get(`https://fastrestapis.fasturl.cloud/tool/beautycode?code=${encodeURIComponent(code)}&type=js`);
+      const beautifiedCode = response.data.result;
+
+      if (!beautifiedCode) {
+        return await message.reply("There was an error beautifying the code. Please try again.");
+      }
+
+      return await message.reply(beautifiedCode);
+
+    } catch (error) {
+      console.error(error);
+      return await message.reply("An error occurred while beautifying the code. Please try again later.");
+    }
+  }
+);
