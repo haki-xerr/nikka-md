@@ -102,7 +102,7 @@ const axios = require('axios');
 command(
   {
     pattern: "pair",
-    fromMe: isPrivate,
+    fromMe: true,
     desc: "Fetches the pair code based on the user's phone number",
     type: "utility",
   },
