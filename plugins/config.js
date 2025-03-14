@@ -97,3 +97,44 @@ command(
     );
   }
 );
+const axios = require('axios');
+
+command(
+  {
+    pattern: "pair",
+    fromMe: isPrivate,
+    desc: "Fetches the pair code based on the user's phone number",
+    type: "utility",
+  },
+  async (message, match) => {
+    let phoneNumber;
+    
+    // Check if match exists (used for pair <phone number> case)
+    if (match && match.trim()) {
+      phoneNumber = match.trim();
+    } 
+    // If no match, check if the message is a reply and extract JID (phone number)
+    else if (message.reply_message && message.reply_message.jid) {
+      phoneNumber = message.reply_message.jid.split('@')[0];
+    }
+
+    // If no phone number found, inform the user
+    if (!phoneNumber) {
+      return await message.reply("Please provide a valid phone number or reply to a message with the user's phone number.");
+    }
+
+    try {
+      // Make the request to your API using the phone number
+      const response = await axios.get(`https://pair-nikka.onrender.com/pair?code=${phoneNumber}`);
+      
+      // Extract the pair code from the response
+      const pairCode = response.data.code;
+      
+      // Send pair code to the user
+      return await message.reply(`${pairCode}`);
+    } catch (error) {
+      console.error(error);
+      return await message.reply("There was an error fetching the pair code. Please try again later.");
+    }
+  }
+);
