@@ -863,3 +863,40 @@ command(
         }
     }
 );
+const pk = require("../package.json");
+
+command(
+  {
+    pattern: "repo",
+    fromMe: isPrivate,
+    desc: "Shows bot repository",
+    type: "info",
+  },
+  async (message, match) => {
+    const repoInfo = `\`\`\`╭───𖣘 𝗡𝗶𝗸𝗸𝗮 𝗠𝗗 𝗥𝗲𝗽𝗼 ────
+🌻 Name: Nikka-MD
+🌻 Version: ${pk.version} 
+🌻 Creator: H4KI XER
+🌻 Repo: https://github.com/hakisolos/Nikka-Md
+🌻 Pair: https://pair-nikka.onrender.com
+🌻 Language: JavaScript
+╰────────────\`\`\``;
+
+    const thumbnailUrl = "https://files.catbox.moe/rfgpy8.jpg";
+
+    await message.client.sendMessage(message.jid, {
+      text: repoInfo,
+      contextInfo: {
+        externalAdReply: {
+          title: "𝞖𝞓𝞙𝞘 𝙎𝞢𝞒 - Nikka MD Repository",
+          body: "Official repository of Nikka MD",
+          sourceUrl: "https://github.com/hakisolos/Nikka-Md",
+          mediaType: 4,
+          thumbnailUrl: thumbnailUrl,
+          renderLargerThumbnail: false,
+          showAdAttribution: true,
+        },
+      },
+    });
+  }
+);
