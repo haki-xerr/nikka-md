@@ -40,7 +40,7 @@ Description: ${i.desc}\`\`\``);
         let usern = message.pushName;
         const readMore = String.fromCharCode(8206).repeat(4001);
         const fek = await tiny("nikka md")
-        let menu = `\`\`\`╭────𖣘 ${fek} 𖣘
+        let menu = `\`\`\`╭─𖣘 ${fek} 𖣘
 🌻 Prefix: ${config.HANDLERS}
 🌻︎ Owner: ${BOT_INFO.split(";")[1]}
 🌻︎ Mode: ${config.WORK_TYPE}
