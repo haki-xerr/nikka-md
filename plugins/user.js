@@ -870,14 +870,14 @@ command(
     pattern: "repo",
     fromMe: isPrivate,
     desc: "Shows bot repository",
-    type: "info",
+    type: "user",
   },
   async (message, match) => {
     const repoInfo = `\`\`\`╭───𖣘 𝗡𝗶𝗸𝗸𝗮 𝗠𝗗 𝗥𝗲𝗽𝗼 ────
 🌻 Name: Nikka-MD
 🌻 Version: ${pk.version} 
 🌻 Creator: H4KI XER
-🌻 Repo: https://github.com/hakisolos/Nikka-Md
+🌻 Repo: https://github.com/haki-xerr/Nikka-Md
 🌻 Pair: https://pair-nikka.onrender.com
 🌻 Language: JavaScript
 ╰────────────\`\`\``;
@@ -888,7 +888,7 @@ command(
       text: repoInfo,
       contextInfo: {
         externalAdReply: {
-          title: "𝞖𝞓𝞙𝞘 𝙎𝞢𝞒 - Nikka MD Repository",
+          title: "𝞖𝞓𝞙𝞘 𝙎𝞢𝞒",
           body: "Official repository of Nikka MD",
           sourceUrl: "https://github.com/hakisolos/Nikka-Md",
           mediaType: 4,
