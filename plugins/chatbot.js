@@ -41,7 +41,7 @@ command(
         if (ignoreMessages.some((txt) => message.text.toLowerCase().includes(txt))) return;
 
         try {
-            const apiUrl = `https://api.nikka.us.kg/ai/gemini?q=${encodeURIComponent(message.text)}&apiKey=nikka`;
+            const apiUrl = `https://nikka-api.vercel.app/ai/gemini?q=${encodeURIComponent(message.text)}&apiKey=nikka`;
             const response = await axios.get(apiUrl);
             const replyText = response.data.response || "⚠️ No response from AI.";
             return await message.reply(replyText);

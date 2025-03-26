@@ -1,5 +1,6 @@
 const { command, isPrivate, getJson } = require("../lib/");
 const axios = require("axios");
+const ytSearch = require("yt-search")
 command(
     {
         pattern: "apk",
@@ -152,7 +153,7 @@ command(
 
         try {
             // Fetch video data from API
-            const apiUrl = `https://api.nikka.us.kg/dl/tiktok?apiKey=nikka&url=${encodeURIComponent(match.trim())}`;
+            const apiUrl = `https://nikka-api.vercel.app/dl/tiktok?apiKey=nikka&url=${encodeURIComponent(match.trim())}`;
             const response = await getJson(apiUrl);
 
             // Check for a successful response
@@ -250,3 +251,64 @@ command(
     }
   }
 );
+
+
+/*
+
+command(
+  {
+    pattern: "play",
+    desc: "Plays music",
+    fromMe: isPrivate,
+    type: "downloader",
+  },
+  async (message, match) => {
+    if (!match) return await message.reply("⚠️ Provide a search query!");
+
+    try {
+      // Search YouTube for the first matching result
+      const ytSearch = await require("yt-search").search(match);
+      if (!ytSearch || !ytSearch.all.length) {
+        return await message.reply("❌ No results found.");
+      }
+
+      const videoUrl = ytSearch.all[0].url;
+
+      // Fetch the audio URL using the API
+      const res = await getJson(`https://diegoson-naxordeve.hf.space/api/y2mate?url=${videoUrl}`);
+      
+      if (!res.audio || !res.audio["320"]) {
+        return await message.reply("❌ Failed to get audio.");
+      }
+
+      const audioUrl = res.audio["320"];
+      const thumbnailUrl = res.thumbnail || "https://i.ytimg.com/vi_webp/default.jpg";
+
+      // Send the audio file
+      await message.client.sendMessage(message.jid, {
+        audio: { url: audioUrl },
+        mimetype: "audio/mpeg",
+        ptt: false,
+        contextInfo: {
+          externalAdReply: {
+            title: res.title || "Unknown Title",
+            body: "Powered by Nikka Tech",
+            sourceUrl: videoUrl,
+            mediaUrl: audioUrl,
+            mediaType: 1,
+            showAdAttribution: true,
+            renderLargerThumbnail: true,
+            thumbnailUrl: thumbnailUrl,
+          },
+        },
+      });
+
+    } catch (error) {
+      console.error("Error in play command:", error);
+      await message.reply("❌ Error fetching the audio. Try again later.");
+    }
+  }
+);
+
+
+*/

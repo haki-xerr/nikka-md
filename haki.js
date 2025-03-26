@@ -14,6 +14,7 @@ const path = require("path");
 const events = require("./lib/event");
 const got = require("got");
 const config = require("./config");
+const { getEventConfig } = require("./DB/event");
 const { PluginDB } = require("./lib/database/plugins");
 const saveCreds = require("./lib/session");
 require('module-alias/register');
@@ -195,6 +196,47 @@ conn.ev.on("group-participants.update", async (data) => {
         console.error("Error in group-participants.update handler:", error);
     }
 });
+
+
+conn.ev.removeAllListeners("group-participants.update");
+conn.ev.on("group-participants.update", async (data) => {
+    try {
+        const metadata = await conn.groupMetadata(data.id);
+        const groupName = metadata.subject;
+
+        // CHECK IF GROUP IS ENABLED FOR PROMOTE/DEMOTE EVENTS
+        if (config.EVENTS) {
+            if (data.action === "promote" && config.EVENTS) {
+                for (const participant of data.participants) {
+                    const ppUrl = await conn.profilePictureUrl(participant, "image").catch(() => null);
+                    const promoteMessage = `🎉 @${participant.split("@")[0]} is now an admin of *${groupName}*! 🎊`;
+
+                    await conn.sendMessage(data.id, {
+                        image: { url: ppUrl || "https://files.catbox.moe/placeholder.png" },
+                        caption: promoteMessage,
+                        mentions: [participant],
+                    });
+                }
+            }
+
+            if (data.action === "demote" && config.EVENTS) {
+                for (const participant of data.participants) {
+                    const ppUrl = await conn.profilePictureUrl(participant, "image").catch(() => null);
+                    const demoteMessage = `⚠️ @${participant.split("@")[0]} is no longer an admin of *${groupName}*.`;  
+
+                    await conn.sendMessage(data.id, {
+                        image: { url: ppUrl || "https://files.catbox.moe/placeholder.png" },
+                        caption: demoteMessage,
+                        mentions: [participant],
+                    });
+                }
+            }
+        }
+    } catch (error) {
+        console.error("Error in group-participants.update handler:", error);
+    }
+});
+
       conn.ev.removeAllListeners("messages.upsert");
      conn.ev.on('messages.upsert', async (mess) => {
     const msg = mess.messages[0];

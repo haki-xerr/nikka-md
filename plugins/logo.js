@@ -501,7 +501,7 @@ command(
             return await message.reply("Provide text to carbonate.");
         }
 
-        const url = `https://api.nikka.us.kg/tools/carbon?q=${encodeURIComponent(match)}&apiKey=nikka`;
+        const url = `https://nikka-api.vercel.app/tools/carbon?q=${encodeURIComponent(match)}&apiKey=nikka`;
 
         try {
             // React with "waiting" emoji to indicate processing

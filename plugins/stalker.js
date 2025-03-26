@@ -16,7 +16,7 @@ command(
 
       await message.react("⏳️");
 
-      const response = await getJson(`https://api.nikka.us.kg/stalker/gitstalk?q=${match}&apiKey=nikka`);
+      const response = await getJson(`https://nikka-api.vercel.app/stalker/gitstalk?q=${match}&apiKey=nikka`);
       if (!response || !response.data) {
         await message.react("❌️");
         return await message.reply("Failed to fetch user details. Please try again.");

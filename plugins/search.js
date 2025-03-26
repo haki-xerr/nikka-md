@@ -17,7 +17,7 @@ command(
             const searchQuery = parts[0].trim();
             const index = parts.length > 1 ? parseInt(parts[1].trim()) : null;
 
-            const response = await axios.get('https://api.nikka.us.kg/search/googleimg?apiKey=nikka&q=' + encodeURIComponent(searchQuery));
+            const response = await axios.get('https://nikka-api.vercel.app/search/googleimg?apiKey=nikka&q=' + encodeURIComponent(searchQuery));
             const images = response.data.images;
 
             if (Array.isArray(images) && images.length > 0) {
@@ -60,7 +60,7 @@ command(
         await message.react("⏳");
 
         try {
-            const response = await axios.get('https://api.nikka.us.kg/search/news?apiKey=nikka');
+            const response = await axios.get('https://nikka-api.vercel.app/search/news?apiKey=nikka');
             const news = response.data.results;
 
             if (Array.isArray(news) && news.length > 0) {
@@ -256,7 +256,7 @@ command(
         const [query, limit] = match.split(",").map((item) => item.trim());
         const maxResults = limit && !isNaN(limit) ? parseInt(limit) : null;
   
-        const response = await getJson(`https://api.nikka.us.kg/search/yts?apiKey=nikka&q=${query}`);
+        const response = await getJson(`https://nikka-api.vercel.app/search/yts?apiKey=nikka&q=${query}`);
   
         if (!response || !response.data || response.data.length === 0) {
           await message.react("❌️");

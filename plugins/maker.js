@@ -1,4 +1,4 @@
-const { command } = require("../lib")
+const { command, isPrivate } = require("../lib")
 const { downloadMediaMessage } = require('@whiskeysockets/baileys');
 const fileType = require('file-type');
 const FormData = require('form-data');
@@ -6,13 +6,12 @@ const fetch = require('node-fetch');
 
 const MAX_FILE_SIZE_MB = 200;
 
-// Upload media to Catbox
 async function uploadToCatbox(buffer) {
   try {
     const type = await fileType.fromBuffer(buffer);
     const ext = type ? type.ext : 'bin';
     const bodyForm = new FormData();
-    bodyForm.append("fileToUpload", buffer, `file.${ext}`);  // Corrected line
+    bodyForm.append("fileToUpload", buffer, `file.${ext}`);  
     bodyForm.append("reqtype", "fileupload");
 
     const res = await fetch("https://catbox.moe/user/api.php", {
@@ -79,7 +78,7 @@ command(
         return await message.reply("Please reply to a media message (image, video, or sticker) to process it.");
       }
 
-      const apiUrlBase = "https://api.nikka.us.kg/tools/wasted?apiKey=nikka&url=";
+      const apiUrlBase = "https://nikka-api.vercel.app/tools/wasted?apiKey=nikka&url=";
       const apiUrl = await processMedia(message, apiUrlBase);
 
       if (!apiUrl) {

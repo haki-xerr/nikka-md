@@ -810,7 +810,7 @@ command(
         pattern: "greeting",
         desc: "Toggle greeting messages on or off for this group.",
         fromMe: true,
-        type: "group",
+        type: "config",
     },
     async (message, match) => {
         if (!message.isGroup) return await message.haki("This command can only be used in groups.");
@@ -834,5 +834,36 @@ command(
         } else {
             return await message.haki("Usage: !greeting on or !greeting off");
         }
+    }
+);
+
+
+
+
+
+
+
+
+command(
+    {
+        pattern: "event",
+        desc: "Toggle all event notifications on or off.",
+        fromMe: true,
+        type: "config",
+    },
+    async (message, match) => {
+        if (!message.isGroup) return await message.haki("⚠️ This command can only be used in groups.");
+
+        var admin = await isAdmin(message.jid, message.user, message.client);
+        if (!admin) return await message.haki("*_I'm not admin_*");
+
+        if (!["on", "off"].includes(match.toLowerCase())) {
+            return await message.haki("❌ Invalid usage!\n\nUse: `.toggleevent on`\nOr: `.toggleevent off`");
+        }
+
+        // Toggle config.EVENTS
+        config.EVENTS = match.toLowerCase() === "on";
+
+        await message.haki(`✅ Event notifications have been *${match.toUpperCase()}*.`);
     }
 );

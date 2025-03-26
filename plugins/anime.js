@@ -85,7 +85,7 @@ command(
   async(message) => {
     await message.react("⏳️");
     try{
-      const api = "https://api.nikka.us.kg/anime/status?apiKey=nikka";
+      const api = "https://nikka-api.vercel.app/anime/status?apiKey=nikka";
       const response = await axios.get(api);
       const res = response.data.video;
       const vid = res.link;
